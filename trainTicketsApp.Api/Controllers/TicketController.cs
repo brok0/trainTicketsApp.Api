@@ -15,16 +15,16 @@ namespace trainTicketsApp.Api.Controllers
     [Route("[controller]")]
     public class TicketController : ControllerBase
     {
-        private readonly ITicketService _service;
+        private readonly IAppService _service;
         private readonly IMapper _mapper;
 
-        public TicketController(ITicketService service, IMapper mapper)
+        public TicketController(IAppService service, IMapper mapper)
         {
             _service = service;
             _mapper = mapper;
         }
         [AllowAnonymous]
-        [HttpGet("/tickets/all")]
+        [HttpGet("/tickets")]
         public async Task<IActionResult> GetAllTicketsAsync()
         {
             var tickets = await _service.GetAllAsync();
@@ -42,7 +42,7 @@ namespace trainTicketsApp.Api.Controllers
 
         [Authorize]
         [HttpPost]
-        [Route("/newTicket")]
+        [Route("/ticket/new")]
         public async Task <IActionResult> CreateTicket(TicketCreateDto ticket)
         {
             var newTicket = await _service.CreateNewAsync(_mapper.Map<Ticket>(ticket));
@@ -72,6 +72,39 @@ namespace trainTicketsApp.Api.Controllers
             await _service.UpdateTicket(ticketToUpdate);
             return Ok(_mapper.Map<TicketReadDto>(newTicket));
         }
+        [HttpGet]
+        [Route("/ticket/search")]
+        public async Task<IActionResult> GetTicketByQuery([FromQuery]string To,[FromQuery]string From)
+        {
+            var searchedTickets = await _service.GetTicketBySearchRequestAsync(To,From);
+            return Ok(searchedTickets);
+        }
 
+        [HttpGet]
+        [Route("/ticket/user")]
+        public async Task<IActionResult> GetTicketsForUser([FromQuery]int userid)
+        {
+            var userTickets = await _service.GetTicketsForUser(userid);
+            return Ok(userTickets);
+        }
+
+        [HttpPost]
+        [Route("/ticket/user/add")]
+        public async Task<IActionResult> UserAddsTicket([FromQuery]int ticketId,[FromQuery] int userid)
+        {
+             await _service.UserAddsTicket(ticketId,userid);
+            return Ok();
+        }
+
+
+        [HttpGet]
+        [Route("/ticket/cities")]
+        public async Task<IActionResult> GetAllCities()
+        {
+            var listOfCities = await _service.GetAllCities();
+            return Ok(listOfCities);
+        }
+
+        
     }
 }

@@ -23,6 +23,7 @@ namespace trainTicketsApp.Api.Controllers
 
             [AllowAnonymous]
             [HttpPost]
+            [Route("/user/register")]
             public async Task<ActionResult> RegisterUserAsync(PersonCreateDto userDto)
             {
                 var user = await _authenticationService.RegisterUserAsync(userDto.Login, userDto.Password,userDto.Email);

@@ -3,18 +3,22 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30503.244
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "trainTicketsApp.Api", "trainTicketsApp.Api\trainTicketsApp.Api.csproj", "{6DA67D47-FD20-49EB-8EF1-97EB9B83FDE9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "trainTicketsApp.Api", "trainTicketsApp.Api\trainTicketsApp.Api.csproj", "{6DA67D47-FD20-49EB-8EF1-97EB9B83FDE9}"
 	ProjectSection(ProjectDependencies) = postProject
 		{EAF6DE65-03E7-404A-9094-25CB2B7A7CB7} = {EAF6DE65-03E7-404A-9094-25CB2B7A7CB7}
 		{05625C92-418D-46D3-9D88-D083B2C7568F} = {05625C92-418D-46D3-9D88-D083B2C7568F}
 		{16A1D7AE-05E4-427D-8E6C-286170770425} = {16A1D7AE-05E4-427D-8E6C-286170770425}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainTickets.Infrastructure", "TrainTickets.Infrastructure\TrainTickets.Infrastructure.csproj", "{EAF6DE65-03E7-404A-9094-25CB2B7A7CB7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainTickets.Infrastructure", "TrainTickets.Infrastructure\TrainTickets.Infrastructure.csproj", "{EAF6DE65-03E7-404A-9094-25CB2B7A7CB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainTickets.BusinessLogic", "TrainTickets.BusinessLogic\TrainTickets.BusinessLogic.csproj", "{16A1D7AE-05E4-427D-8E6C-286170770425}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainTickets.BusinessLogic", "TrainTickets.BusinessLogic\TrainTickets.BusinessLogic.csproj", "{16A1D7AE-05E4-427D-8E6C-286170770425}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainTickets.Domain", "TrainTickets.Domain\TrainTickets.Domain.csproj", "{05625C92-418D-46D3-9D88-D083B2C7568F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainTickets.Domain", "TrainTickets.Domain\TrainTickets.Domain.csproj", "{05625C92-418D-46D3-9D88-D083B2C7568F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{32CF2CC6-4613-49EC-8B8D-0FA45E0C3F2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainTickets.Tests", "TrainTickets.Tests\TrainTickets.Tests.csproj", "{7390BBBB-68EC-4C9C-B289-5CE631885DC1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,9 +42,16 @@ Global
 		{05625C92-418D-46D3-9D88-D083B2C7568F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05625C92-418D-46D3-9D88-D083B2C7568F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05625C92-418D-46D3-9D88-D083B2C7568F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7390BBBB-68EC-4C9C-B289-5CE631885DC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7390BBBB-68EC-4C9C-B289-5CE631885DC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7390BBBB-68EC-4C9C-B289-5CE631885DC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7390BBBB-68EC-4C9C-B289-5CE631885DC1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7390BBBB-68EC-4C9C-B289-5CE631885DC1} = {32CF2CC6-4613-49EC-8B8D-0FA45E0C3F2E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {70B71568-BE02-4F5F-98CA-F16B55BE2741}

@@ -15,7 +15,7 @@ namespace TrainTickets.BusinessLogic.Services
         public class AuthenticationService : IAuthenticationService
         {
             private readonly IPersonRepository _personRepository;
-
+            AuthenticationLogic logic = new AuthenticationLogic();
             public AuthenticationService(IPersonRepository personRepository)
             {
                 _personRepository = personRepository;
@@ -30,7 +30,7 @@ namespace TrainTickets.BusinessLogic.Services
                     return null;
                 }
 
-                if (ComparePasswords(password, user))
+                if (logic.ComparePasswords(password, user))
                 {
                     return user;
                 }
@@ -45,20 +45,11 @@ namespace TrainTickets.BusinessLogic.Services
                     throw new UserAlreadyExistsException();
                 }
 
-                byte[] salt = new byte[128 / 8];
-                using (var rng = RandomNumberGenerator.Create())
-                {
-                    rng.GetBytes(salt);
-                }
+                byte[] salt = logic.GenerateSalt();
 
 
 
-            var encryptedPassword = Convert.ToBase64String(KeyDerivation.Pbkdf2(
-                password: password,
-                salt: salt,
-                prf: KeyDerivationPrf.HMACSHA256,
-                iterationCount: 10000,
-                numBytesRequested: 256 / 8));
+            var encryptedPassword = logic.EncryptPassword(password, salt);
 
             var person = new Person
             {
@@ -75,24 +66,7 @@ namespace TrainTickets.BusinessLogic.Services
                 return person;
             }
 
-            private bool ComparePasswords(string inputPassword, Person user)
-            {
-
-                byte[] salt = user.salt;
-                var encryptedInputPassword = Convert.ToBase64String(KeyDerivation.Pbkdf2(
-                password: inputPassword,
-                salt: salt,
-                prf: KeyDerivationPrf.HMACSHA256,
-                iterationCount: 10000,
-                numBytesRequested: 256 / 8));
-
-
-                if (encryptedInputPassword == user.Password)
-                {
-                    return true;
-                }
-                return false;
-            }
+            
 
 
         }

@@ -47,19 +47,19 @@ namespace trainTicketsApp.Api
            
             services.AddScoped<IPersonRepository, PersonRepository>();
 
-            services.AddScoped<ITicketService, TicketService>();
+            services.AddScoped<IAppService, AppService>();
             services.AddScoped<ITicketsRepository, TicketRepository>();
 
             services.AddScoped<TrainTickets.BusinessLogic.Abstractions.IAuthenticationService, TrainTickets.BusinessLogic.Services.AuthenticationService>();
 
           
-           /* services.AddCors(o => o.AddPolicy("ReactPolicy", builder =>
+            services.AddCors(o => o.AddPolicy("ReactPolicy", builder =>
             {
                 builder.AllowAnyOrigin()
                        .AllowAnyMethod()
                        .AllowAnyHeader()
                        ;
-            }));*/ //react-cors
+            })); //react-cors
             services.AddSwaggerGen(c =>
             {
                 c.AddSecurityDefinition("basic", new OpenApiSecurityScheme
