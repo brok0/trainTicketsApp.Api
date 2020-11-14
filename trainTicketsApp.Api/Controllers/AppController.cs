@@ -13,12 +13,12 @@ namespace trainTicketsApp.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class TicketController : ControllerBase
+    public class AppController : ControllerBase
     {
         private readonly IAppService _service;
         private readonly IMapper _mapper;
 
-        public TicketController(IAppService service, IMapper mapper)
+        public AppController(IAppService service, IMapper mapper)
         {
             _service = service;
             _mapper = mapper;
@@ -31,16 +31,16 @@ namespace trainTicketsApp.Api.Controllers
             return Ok(_mapper.Map<IEnumerable<TicketReadDto>>(tickets));
         }
 
-        [Authorize]
+       // [Authorize]
         [HttpGet("/ticket/findId")]
         public async Task <IActionResult> GetTicketById([FromQuery]int id)
         {
             var ticket = await _service.GetTicketAsync(id);
-            return Ok(_mapper.Map<IEnumerable<TicketReadDto>>(ticket));
+            return Ok(_mapper.Map<TicketReadDto>(ticket));
 
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPost]
         [Route("/ticket/new")]
         public async Task <IActionResult> CreateTicket(TicketCreateDto ticket)
@@ -49,10 +49,11 @@ namespace trainTicketsApp.Api.Controllers
             return Ok(_mapper.Map<TicketReadDto>(newTicket));
 
         }
-        [Authorize]
-        [HttpDelete("{id:int}")]
+        //[Authorize]
+        [HttpDelete]
+        [Route("/ticket/delete")]
 
-        public async Task<IActionResult> DeleteAsync(int id)
+        public async Task<IActionResult> DeleteAsync([FromQuery]int id)
         {
             if (!ModelState.IsValid)
                 return BadRequest();
@@ -63,14 +64,15 @@ namespace trainTicketsApp.Api.Controllers
             return NoContent();
         }
 
-        [Authorize]
-        [HttpPut("{id:int}")]
-        public async Task<IActionResult> UpdateTicket(int id,TicketUpdateDto newTicket)
+        //[Authorize]
+        [HttpPut]
+        [Route("/ticket/update")]
+        public async Task<IActionResult> UpdateTicket([FromQuery]int id,TicketUpdateDto newTicket)
         {
             var ticketToUpdate = await _service.GetTicketAsync(id);
             _mapper.Map(newTicket, ticketToUpdate);
             await _service.UpdateTicket(ticketToUpdate);
-            return Ok(_mapper.Map<TicketReadDto>(newTicket));
+            return Ok();
         }
         [HttpGet]
         [Route("/ticket/search")]
